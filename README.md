@@ -46,10 +46,6 @@ docker-compose up --build
 - **Airflow UI:** `http://localhost:8080` (`admin` / `admin`)
 - **MLflow UI:** `http://localhost:5000`
 
-- # RecoMart End-to-End Data Management Pipeline for Recommendation System
-
-Complete data management pipeline for the **Data Management for Machine Learning (S1-26_DSEZG529)** Experiential Learning Assignment.
-
 ## Architectural Overview & Detailed Pipeline Flow
 
 The RecoMart data management platform implements modern data stack (MDS) and MLOps principles, ensuring continuous, validated, and reproducible transformation of raw behavioral logs and product catalogs into deployable recommendation models.
