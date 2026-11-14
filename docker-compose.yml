@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  recomart-pipeline:
+    build: .
+    container_name: recomart-data-pipeline
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+      - "5000:5000"
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=SequentialExecutor
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=sqlite:////app/airflow/airflow.db
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./airflow:/app/airflow
+      - ./mlruns:/app/mlruns
+    command: ["all"]

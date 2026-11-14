@@ -1,0 +1,40 @@
+stages:
+  ingest:
+    cmd: python ingestion/clickstream_simulator.py && python ingestion/api_client.py
+    deps:
+      - ingestion/clickstream_simulator.py
+      - ingestion/api_client.py
+    outs:
+      - data/raw
+
+  validate:
+    cmd: python validation/validator.py
+    deps:
+      - validation/validator.py
+      - data/raw
+    outs:
+      - docs/data_quality_report.md
+
+  prepare:
+    cmd: python preprocessing/data_prep.py
+    deps:
+      - preprocessing/data_prep.py
+      - data/raw
+    outs:
+      - data/processed
+
+  transform:
+    cmd: python transformation/transformer.py
+    deps:
+      - transformation/transformer.py
+      - data/processed
+    outs:
+      - data/features
+
+  train:
+    cmd: python models/train_recommendation.py
+    deps:
+      - models/train_recommendation.py
+      - data/features
+    outs:
+      - models/artifacts/svd_model.pkl
